@@ -43,37 +43,37 @@ Login page
 ![login](Pictures/login.png)
 <br>
 Client page 
-![login](Pictures/client.png)
+![Client](Pictures/Client.png)
 <br>
 History page
-![login](Pictures/history.png)
+![History](Pictures/history.png)
 <br>
 Calendar page
-![login](Pictures/calendar.png)
+![Calendar](Pictures/calendar.png)
 <br>
 Price List page
-![login](Pictures/Price%20list.png)
+![Price List](Pictures/Price%20list.png)
 <br>
 Add Client page
-![login](Pictures/Add%20Client.png)
+![Add Client](Pictures/Add%20Client.png)
 <br>
 Login mobile page 
-![login](Pictures/login-mobile.png)
+![Login](Pictures/login-mobile.png)
 <br>
 Client mobile page 
-![login](Pictures/client-mobile.png)
+![Client](Pictures/client-mobile.png)
 <br>
 History mobile page
-![login](Pictures/history-mobile.png)
+![History](Pictures/history-mobile.png)
 <br>
 Calendar mobile page
-![login](Pictures/client-mobile.png)
+![Calendar](Pictures/client-mobile.png)
 <br>
 Price List mobile page
-![login](Pictures/price_list-mobile.png)
+![Price List](Pictures/price_list-mobile.png)
 <br>
 Add Client mobile page
-![login](Pictures/add-client-mobile.png)
+![Add Client](Pictures/add-client-mobile.png)
 <br>
 ## Examples
 
