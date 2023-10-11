@@ -46,10 +46,10 @@ Client page
 ![Client](Pictures/Client.png)
 <br>
 History page
-![History](Pictures/history.png)
+![History](Pictures/History.png)
 <br>
 Calendar page
-![Calendar](Pictures/calendar.png)
+![Calendar](Pictures/Calendar.png)
 <br>
 Price List page
 ![Price List](Pictures/Price%20list.png)
