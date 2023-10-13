@@ -1,5 +1,6 @@
 package pl.hodan.carservice.entity;
 
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,17 +9,21 @@ import java.util.List;
 
 @Getter
 @Setter
+@Entity
+@Table(name = "clients")
 
 public class Client {
-    private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
     private String surname;
     private String address;
     private int phoneNumber;
     private String email;
-    private List<Car> carList; //Może być zmiana
 
-    public Client(long id, String name, String surname, String address, int phoneNumber, String email) {
+
+    public Client(Long id, String name, String surname, String address, int phoneNumber, String email) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -28,6 +33,5 @@ public class Client {
     }
 
     public Client() {
-        carList = new ArrayList<>();
     }
 }
