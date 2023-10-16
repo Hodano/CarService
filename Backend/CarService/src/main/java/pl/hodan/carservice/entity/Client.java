@@ -4,14 +4,11 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "clients")
-
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,10 +18,13 @@ public class Client {
     private String address;
     private int phoneNumber;
     private String email;
+    @ManyToOne
+    private User user;
+    @OneToMany(mappedBy = "client")
+    private Set<Car> carSet;
 
 
-    public Client(Long id, String name, String surname, String address, int phoneNumber, String email) {
-        this.id = id;
+    public Client(String name, String surname, String address, int phoneNumber, String email) {
         this.name = name;
         this.surname = surname;
         this.address = address;

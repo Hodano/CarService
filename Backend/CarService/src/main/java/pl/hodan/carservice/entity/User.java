@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Set;
+
 @Getter
 @Setter
 @Entity
@@ -15,17 +17,20 @@ public class User {
     private Long id;
     private String email;
     private String password;
-    private String name;
-    private String surname;
-    private int phoneNumber;
-    private String address;
+    @OneToOne
+    private UserDetail userDetail;
 
-    public User(Long id, String name, String surname, int phoneNumber, String address, String email, String password) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
+    @OneToMany(mappedBy = "user")
+    private Set<Calendar> calendarSet;
+    @OneToMany(mappedBy = "user")
+    private Set<PriceList> priceListSet;
+    @OneToMany(mappedBy = "user")
+    private Set<Client> clientSet;
+    @ManyToMany(mappedBy = "userSet")
+    private Set<Role> roleSet;
+
+
+    public User(String email, String password) {
         this.email = email;
         this.password = password;
     }

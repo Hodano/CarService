@@ -1,11 +1,11 @@
 package pl.hodan.carservice.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import pl.hodan.carservice.enums.Roles;
+
+import java.util.Set;
 
 @Setter
 @Getter
@@ -14,13 +14,16 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String roleName;
+    @Enumerated(EnumType.STRING)
+    private Roles roleName;
+    @ManyToMany
+    private Set<User> userSet;
 
-    public Role(Long id, String roleName) {
-        this.id = id;
+    public Role(Roles roleName) {
         this.roleName = roleName;
     }
 
     public Role() {
     }
+
 }

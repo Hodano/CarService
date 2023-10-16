@@ -1,11 +1,12 @@
 package pl.hodan.carservice.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.context.annotation.Primary;
+import org.springframework.validation.annotation.Validated;
+
+import java.sql.Date;
 
 @Setter
 @Getter
@@ -14,13 +15,14 @@ public class Calendar {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String dateEvent;
+    private Date dateEvent;
     private String event;
+    @ManyToOne
+    private User user;
 
-    public Calendar(Long id, String dateEvent, String event) {
+    public Calendar(Date dateEvent, String event) {
         this.dateEvent = dateEvent;
         this.event = event;
-        this.id = id;
     }
 
     public Calendar() {

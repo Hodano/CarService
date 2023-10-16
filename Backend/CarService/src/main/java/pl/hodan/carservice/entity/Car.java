@@ -3,17 +3,17 @@ package pl.hodan.carservice.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import pl.hodan.carservice.model.Color;
+import pl.hodan.carservice.enums.Color;
+
+import java.util.Set;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "cars")
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long clientId;
     private String carModel;
     private String bodyType;
     private String yearOfProduction;
@@ -21,13 +21,15 @@ public class Car {
     private String numberVin;
     @Enumerated(EnumType.STRING)
     private Color color;
+    @ManyToOne
+    private Client client;
+    @OneToMany(mappedBy = "car")
+    private Set<History> historySet;
 
     public Car() {
     }
 
-    public Car(Long id, Long clientId, String carModel, String bodyType, String yearOfProduction, int carMileage, String numberVin, Color color) {
-        this.id = id;
-        this.clientId = clientId;
+    public Car(String carModel, String bodyType, String yearOfProduction, int carMileage, String numberVin, Color color) {
         this.carModel = carModel;
         this.bodyType = bodyType;
         this.yearOfProduction = yearOfProduction;

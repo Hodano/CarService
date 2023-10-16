@@ -1,9 +1,6 @@
 package pl.hodan.carservice.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,12 +12,14 @@ public class PriceList {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nameOfService;
-    private Double $prices;
+    private Double prices;
+    @ManyToOne
+    private User user;
 
-    public PriceList(Long id, String nameOfService, Double $prices) {
+    public PriceList(Long id, String nameOfService, Double prices) {
         this.id = id;
         this.nameOfService = nameOfService;
-        this.$prices = $prices;
+        this.prices = prices;
     }
 
     public PriceList() {
