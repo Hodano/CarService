@@ -9,7 +9,6 @@ import pl.hodan.carservice.repository.RoleRepository;
 @Service
 public class RoleService {
     private final RoleRepository roleRepository;
-    private boolean initialized = false;
 
     public RoleService(RoleRepository roleRepository) {
         this.roleRepository = roleRepository;
@@ -18,9 +17,8 @@ public class RoleService {
     @PostConstruct
     private void init()
     {
-        if(!initialized){
+        if(!roleRepository.existsRoleByIdNotNull()){
             initializeRoles();
-            initialized=true;
         }
     }
     private void initializeRoles(){
