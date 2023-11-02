@@ -2,11 +2,9 @@ package pl.hodan.carservice.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.hodan.carservice.DTO.UserDTO;
+import pl.hodan.carservice.DTO.UserDTOPassword;
 import pl.hodan.carservice.service.UsersService;
 
 import java.util.List;
@@ -27,11 +25,31 @@ public class UserController {
     }
 
     @GetMapping("/user/{id}")
-    public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
+    public ResponseEntity getUserById(@PathVariable Long id) {
         Optional<UserDTO> userDTOOptional = usersService.getUserById(id);
 
         return userDTOOptional.map(userDTO -> new ResponseEntity<>(userDTO, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+    @PostMapping("add-user")
+    public ResponseEntity createUser(@RequestBody UserDTOPassword userDTOPassword){
+        if(usersService.createUser(userDTOPassword))
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+    @PutMapping("modify-user/{id}")
+    public ResponseEntity modifyUser(@PathVariable Long id, @RequestBody UserDTOPassword userDTOPassword){
+        if(usersService.modifyUser(id,userDTOPassword))
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+    @DeleteMapping("delete-user/{id}")
+    public ResponseEntity removeUser(@PathVariable Long id){
+        if(usersService.removeUserById(id))
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+
 
 }

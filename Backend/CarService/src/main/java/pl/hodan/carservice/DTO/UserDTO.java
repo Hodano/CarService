@@ -8,6 +8,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 @Getter
 @Setter
 public class UserDTO {
+    private Long id;
     private String email;
     private String name;
     private String surname;

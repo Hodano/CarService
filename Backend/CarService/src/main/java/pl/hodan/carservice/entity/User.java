@@ -17,7 +17,7 @@ public class User {
     private Long id;
     private String email;
     private String password;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private UserDetail userDetail;
 
     @OneToMany(mappedBy = "user")
