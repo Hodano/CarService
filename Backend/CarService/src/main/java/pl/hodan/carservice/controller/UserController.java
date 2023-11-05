@@ -24,8 +24,8 @@ public class UserController {
         return usersService.getUsers();
     }
 
-    @GetMapping("/user/{id}")
-    public ResponseEntity getUserById(@PathVariable Long id) {
+    @GetMapping("/user")
+    public ResponseEntity getUserById(@RequestParam Long id) {
         Optional<UserDTO> userDTOOptional = usersService.getUserById(id);
 
         return userDTOOptional.map(userDTO -> new ResponseEntity<>(userDTO, HttpStatus.OK))
@@ -37,14 +37,14 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.CREATED);
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
-    @PutMapping("modify-user/{id}")
-    public ResponseEntity modifyUser(@PathVariable Long id, @RequestBody UserDTOPassword userDTOPassword){
+    @PutMapping("modify-user")
+    public ResponseEntity modifyUser(@RequestParam Long id, @RequestBody UserDTOPassword userDTOPassword){
         if(usersService.modifyUser(id,userDTOPassword))
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-    @DeleteMapping("delete-user/{id}")
-    public ResponseEntity removeUser(@PathVariable Long id){
+    @DeleteMapping("delete-user")
+    public ResponseEntity removeUser(@RequestParam Long id){
         if(usersService.removeUserById(id))
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

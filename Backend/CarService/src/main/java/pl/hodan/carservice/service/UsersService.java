@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import pl.hodan.carservice.DTO.UserDTOPassword;
 import pl.hodan.carservice.entity.User;
 import pl.hodan.carservice.DTO.UserDTO;
+import pl.hodan.carservice.exception.UserNotFoundException;
 import pl.hodan.carservice.repository.UserDetailRepository;
 import pl.hodan.carservice.repository.UserRepository;
 
@@ -67,6 +68,13 @@ public class UsersService {
             return true;
         }
         return false;
+    }
+
+    public  User checkIfUserIdExist(Long userId) {
+        Optional<User> user = userRepository.findById(userId);
+        if (user.isPresent())
+            return user.get();
+        throw new UserNotFoundException("User with id " + userId + "notExist");
     }
 
 

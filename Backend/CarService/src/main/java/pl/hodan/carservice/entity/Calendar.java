@@ -1,5 +1,6 @@
 package pl.hodan.carservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +18,7 @@ public class Calendar {
     private Long id;
     private Date dateEvent;
     private String event;
+    @JsonIgnore
     @ManyToOne
     private User user;
 
