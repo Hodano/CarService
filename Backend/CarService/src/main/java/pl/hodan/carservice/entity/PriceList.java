@@ -1,5 +1,6 @@
 package pl.hodan.carservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,6 +14,7 @@ public class PriceList {
     private Long id;
     private String nameOfService;
     private Double prices;
+    @JsonIgnore
     @ManyToOne
     private User user;
 

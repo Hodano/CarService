@@ -33,9 +33,8 @@ public class CalendarController {
     }
     @PutMapping("modify-calendar")
     public ResponseEntity modifyCalendar(@RequestParam Long userId, @RequestParam Long calendarId, @RequestBody Calendar newCalendar){
-        if(calendarService.modifyCalendarWithUserIdByCalendarId(userId,calendarId,newCalendar)){
+        if(calendarService.modifyCalendarWithUserIdByCalendarId(userId,calendarId,newCalendar))
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
-        }
         return new ResponseEntity(HttpStatus.NOT_FOUND);
     }
     @DeleteMapping("delete-calendar")
