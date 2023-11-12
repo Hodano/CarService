@@ -1,5 +1,6 @@
 package pl.hodan.carservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,8 +19,10 @@ public class Client {
     private String address;
     private int phoneNumber;
     private String email;
+    @JsonIgnore
     @ManyToOne
     private User user;
+    @JsonIgnore
     @OneToMany(mappedBy = "client")
     private Set<Car> carSet;
 

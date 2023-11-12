@@ -9,12 +9,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CalendarService {
+public class CalendarsService {
     private final CalendarRepository calendarRepository;
 
     private final UsersService usersService;
 
-    public CalendarService(CalendarRepository calendarRepository, UsersService usersService) {
+    public CalendarsService(CalendarRepository calendarRepository, UsersService usersService) {
         this.calendarRepository = calendarRepository;
         this.usersService = usersService;
     }

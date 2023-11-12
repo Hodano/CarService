@@ -6,11 +6,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import pl.hodan.carservice.DTO.UserDTO;
 import pl.hodan.carservice.DTO.UserDTOPassword;
+import pl.hodan.carservice.entity.Client;
 import pl.hodan.carservice.entity.User;
-import pl.hodan.carservice.entity.UserDetail;
 
 @Configuration
-public class UserMapperConfiguration {
+public class MapperConfiguration {
     @Bean
     public ModelMapper modelMapper(){
         ModelMapper modelMapper = new ModelMapper();
@@ -66,6 +66,17 @@ public class UserMapperConfiguration {
 
             }
         });
+//        modelMapper.addMappings(new PropertyMap<Client, Client>() {
+//            @Override
+//            protected void configure() {
+//                map().setName(source.getName());
+//                map().setSurname(source.getSurname());
+//                map().setAddress(source.getAddress());
+//                map().setPhoneNumber(source.getPhoneNumber());
+//                map().setEmail(source.getEmail());
+//
+//            }
+//        });
         return modelMapper;
     }
 }
