@@ -12,6 +12,7 @@ public interface ClientRepository extends JpaRepository<Client,Long> {
     List<Client> findClientByUserId(Long userId);
     boolean existsClientById(Long clientId);
     Optional<Client> findClientByUserIdAndId(Long userId, Long clientId);
+    Client getClientById(Long clientId);
 
 
 }

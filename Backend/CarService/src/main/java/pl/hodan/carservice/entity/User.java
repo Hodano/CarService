@@ -25,7 +25,7 @@ public class User {
     private Set<Calendar> calendarSet;
     @OneToMany(mappedBy = "user")
     private Set<PriceList> priceListSet;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",cascade =CascadeType.ALL)
     private Set<Client> clientSet;
     @ManyToMany(mappedBy = "userSet")
     private Set<Role> roleSet;

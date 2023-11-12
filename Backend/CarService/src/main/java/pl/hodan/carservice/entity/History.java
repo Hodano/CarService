@@ -1,5 +1,6 @@
 package pl.hodan.carservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,6 +14,7 @@ public class History {
     private Long id;
     private String dateOfHistoryCar; // zmiana na date...
     private String descriptionHistory;
+    @JsonIgnore
     @ManyToOne
     private Car car;
 

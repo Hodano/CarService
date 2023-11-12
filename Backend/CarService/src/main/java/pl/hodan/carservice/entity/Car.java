@@ -1,5 +1,6 @@
 package pl.hodan.carservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,9 +22,11 @@ public class Car {
     private String numberVin;
     @Enumerated(EnumType.STRING)
     private Color color;
+    @JsonIgnore
     @ManyToOne
     private Client client;
-    @OneToMany(mappedBy = "car")
+    @JsonIgnore
+    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
     private Set<History> historySet;
 
     public Car() {

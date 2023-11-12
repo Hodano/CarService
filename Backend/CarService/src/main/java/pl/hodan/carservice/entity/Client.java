@@ -23,7 +23,7 @@ public class Client {
     @ManyToOne
     private User user;
     @JsonIgnore
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private Set<Car> carSet;
 
 

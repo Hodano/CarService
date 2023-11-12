@@ -63,6 +63,16 @@ public class ClientsService {
         }
         return false;
     }
+    public Client checkIfClientIdExist(Long clientId){
+        Optional<Client> client = clientRepository.findById(clientId);
+        if(client.isPresent())
+            return client.get();
+        throw new ClientNotFoundException("Client with id " + clientId + "notExist");
+    }
+//    public Client getClientById(Long clientId){
+//        checkIfClientIdExist(clientId);
+//        return clientRepository.getClientById(clientId);
+//    }
 
     private void setUserForClient(Long userId, Client client) {
         client.setUser(usersService.checkIfUserIdExist(userId));
@@ -73,6 +83,8 @@ public class ClientsService {
         if (!clientRepository.existsClientById(clientId))
             throw new ClientNotFoundException("Client with id " + clientId + "notExist");
 
-
     }
+
+
+
 }
