@@ -2,15 +2,11 @@ package pl.hodan.carservice.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import org.springframework.context.annotation.Primary;
-import org.springframework.validation.annotation.Validated;
+import lombok.Data;
 
 import java.sql.Date;
 
-@Setter
-@Getter
+@Data
 @Entity
 public class Calendar {
     @Id

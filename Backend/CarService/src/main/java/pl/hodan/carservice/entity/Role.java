@@ -1,14 +1,12 @@
 package pl.hodan.carservice.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import pl.hodan.carservice.enums.Roles;
 
 import java.util.Set;
 
-@Setter
-@Getter
+@Data
 @Entity
 public class Role {
     @Id

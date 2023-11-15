@@ -54,7 +54,6 @@ public class CarsService {
     }
 
     public boolean deleteCarWithClientIdByCarId(Long carId) {
-        checkIfCarIdExist(carId);
 
         Optional<Car> car = Optional.ofNullable(checkIfCarIdExist(carId));
         if (car.isPresent()) {

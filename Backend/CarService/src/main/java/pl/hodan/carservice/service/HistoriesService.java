@@ -34,8 +34,7 @@ public class HistoriesService {
     }
 
     public boolean modifyHistoryWithCarIdByHistoryId(Long historyId, History newHistory){
-        checkIfHistoryIdExist(historyId);
-        Optional<History> history = Optional.of(checkIfHistoryIdExist(historyId));
+        Optional<History> history = Optional.ofNullable(checkIfHistoryIdExist(historyId));
         if(history.isPresent()){
             history.get().setDateOfHistoryCar(newHistory.getDateOfHistoryCar());
             history.get().setDescriptionHistory(newHistory.getDescriptionHistory());
@@ -48,7 +47,7 @@ public class HistoriesService {
 
     public boolean deleteHistoryWithCarIdByHistoryId( Long historyId) {
 
-        Optional<History> history = Optional.of(checkIfHistoryIdExist(historyId));
+        Optional<History> history = Optional.ofNullable(checkIfHistoryIdExist(historyId));
         if (history.isPresent()) {
             historyRepository.deleteById(historyId);
             return true;
@@ -66,7 +65,7 @@ public class HistoriesService {
 //            throw new HistoryNotFoundException("History with id" + historyId + "notExist");
 //        }
 //    }
-    private History checkIfHistoryIdExist(Long historyId){
+    public History checkIfHistoryIdExist(Long historyId){
         Optional<History> history = historyRepository.findById(historyId);
         if(history.isPresent()){
             return history.get();
