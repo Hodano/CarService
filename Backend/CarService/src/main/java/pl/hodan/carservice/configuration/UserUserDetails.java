@@ -1,67 +1,83 @@
 package pl.hodan.carservice.configuration;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import pl.hodan.carservice.entity.Role;
 import pl.hodan.carservice.entity.User;
 
 import java.util.Collection;
 import java.util.List;
-
+import java.util.stream.Collectors;
+@EqualsAndHashCode
 public class UserUserDetails implements UserDetails {
 
     private final String email;
     private final String password;
 
-
+    @Getter
+    private final Long id;
+    @Getter
     private final String name;
+    @Getter
     private final String surname;
+    @Getter
     private final String address;
+    @Getter
     private final int phoneNumber;
+    @Getter
 
-//    private final List<SimpleGrantedAuthority> authorities;
+    private final List<SimpleGrantedAuthority> authorities;
 
     public UserUserDetails(User user) {
-        this.email = user.getEmail();
-        this.password = user.getPassword();
-        this.name = user.getUserDetail().getName();
-        this.surname = user.getUserDetail().getSurname();
-        this.address = user.getUserDetail().getAddress();
-        this.phoneNumber = user.getUserDetail().getPhoneNumber();
+        email = user.getEmail();
+        password = user.getPassword();
+        id = user.getId();
+        name = user.getUserDetail().getName();
+        surname = user.getUserDetail().getSurname();
+        address = user.getUserDetail().getAddress();
+        phoneNumber = user.getUserDetail().getPhoneNumber();
+        authorities = user.getRoles()
+                .stream()
+                .map(Role::getRole)
+                .map(roleName->new SimpleGrantedAuthority("ROLE_" + roleName.name()))
+                .collect(Collectors.toList());
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return authorities;
     }
 
     @Override
     public String getPassword() {
-        return null;
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return null;
+       return email;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }
