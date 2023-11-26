@@ -10,7 +10,7 @@ import pl.hodan.carservice.repository.RoleRepository;
 @RequiredArgsConstructor
 @Service
 public class RoleService {
-//    private final RoleRepository roleRepository;
+    private final RoleRepository roleRepository;
 
 //    public RoleService(RoleRepository roleRepository) {
 //        this.roleRepository = roleRepository;
@@ -30,6 +30,7 @@ public class RoleService {
     public Role createUserRole(RolesEnum rolesEnum){
         Role role = new Role();
         role.setRole(rolesEnum);
+        roleRepository.save(role);
         return role;
     }
 }
