@@ -8,14 +8,14 @@ import org.springframework.stereotype.Service;
 import pl.hodan.carservice.auth.AuthenticationRequest;
 import pl.hodan.carservice.auth.AuthenticationResponse;
 import pl.hodan.carservice.auth.RegisterRequest;
-import pl.hodan.carservice.configuration.UserUserDetails;
-import pl.hodan.carservice.entity.User;
-import pl.hodan.carservice.enums.RolesEnum;
-import pl.hodan.carservice.exception.UserNotFoundException;
-import pl.hodan.carservice.repository.UserRepository;
-import pl.hodan.carservice.security.service.JwtService;
-import pl.hodan.carservice.service.RoleService;
-import pl.hodan.carservice.service.UserDetailService;
+import pl.hodan.carservice.common.configuration.UserUserDetails;
+import pl.hodan.carservice.common.entity.User;
+import pl.hodan.carservice.common.enums.RolesEnum;
+import pl.hodan.carservice.common.exception.UserNotFoundException;
+import pl.hodan.carservice.common.repository.UserRepository;
+import pl.hodan.carservice.common.jwt.service.JwtService;
+import pl.hodan.carservice.common.service.RoleService;
+import pl.hodan.carservice.common.service.UserDetailService;
 
 import java.util.Set;
 
