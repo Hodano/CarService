@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.hodan.carservice.auth.AuthenticationRequest;
-import pl.hodan.carservice.auth.AuthenticationResponse;
-import pl.hodan.carservice.auth.RegisterRequest;
+import pl.hodan.carservice.auth.dto.AuthenticationRequest;
+import pl.hodan.carservice.auth.dto.AuthenticationResponse;
+import pl.hodan.carservice.auth.dto.RegisterRequest;
 import pl.hodan.carservice.auth.service.AuthenticationService;
 
 @RestController
@@ -21,7 +21,7 @@ public class AuthenticationController {
     public ResponseEntity<AuthenticationResponse> register(@Valid @RequestBody RegisterRequest request){
         return ResponseEntity.ok(authenticationService.register(request));
     }@PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request){
+    public ResponseEntity<AuthenticationResponse> authenticate(@Valid @RequestBody AuthenticationRequest request){
         return ResponseEntity.ok(authenticationService.authenticate(request));
     }
 

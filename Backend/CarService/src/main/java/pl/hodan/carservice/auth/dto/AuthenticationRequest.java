@@ -1,4 +1,4 @@
-package pl.hodan.carservice.auth;
+package pl.hodan.carservice.auth.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

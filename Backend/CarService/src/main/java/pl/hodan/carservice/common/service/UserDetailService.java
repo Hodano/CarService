@@ -2,7 +2,7 @@ package pl.hodan.carservice.common.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.hodan.carservice.auth.RegisterRequest;
+import pl.hodan.carservice.auth.dto.RegisterRequest;
 import pl.hodan.carservice.common.entity.UserDetail;
 @RequiredArgsConstructor
 @Service

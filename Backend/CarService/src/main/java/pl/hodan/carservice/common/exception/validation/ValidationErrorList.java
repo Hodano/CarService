@@ -4,7 +4,7 @@ import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import pl.hodan.carservice.common.exception.ValidationException;
-import pl.hodan.carservice.common.messages.MessagesEnum;
+
 
 import java.util.HashSet;
 import java.util.Set;
@@ -27,11 +27,6 @@ public class ValidationErrorList {
         this.errors = errors;
     }
 
-    public ValidationErrorList(String field, MessagesEnum messagesEnum) {
-        this.errors = new HashSet<>();
-        errors.add(MyError.of(field, messagesEnum.getCode()));
-    }
-
     public ValidationErrorList(String field, String message) {
         this.errors = new HashSet<>();
         errors.add(MyError.of(field, message));
@@ -47,10 +42,6 @@ public class ValidationErrorList {
 
     public static ValidationErrorList of(Set<MyError> errors) {
         return new ValidationErrorList(errors);
-    }
-
-    public static ValidationErrorList of(String field, MessagesEnum messagesEnum) {
-        return new ValidationErrorList(field, messagesEnum);
     }
 
     public static ValidationErrorList of(String field, String message) {

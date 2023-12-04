@@ -1,4 +1,4 @@
-package pl.hodan.carservice.auth;
+package pl.hodan.carservice.auth.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,4 +11,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AuthenticationResponse {
     private String token;
+
 }

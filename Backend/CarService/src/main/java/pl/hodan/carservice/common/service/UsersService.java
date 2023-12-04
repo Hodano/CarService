@@ -6,6 +6,9 @@ import pl.hodan.carservice.DTO.UserDTOPassword;
 import pl.hodan.carservice.common.entity.User;
 import pl.hodan.carservice.DTO.UserDTO;
 import pl.hodan.carservice.common.exception.UserNotFoundException;
+import pl.hodan.carservice.common.exception.ValidationException;
+import pl.hodan.carservice.common.exception.validation.ValidationErrorList;
+import pl.hodan.carservice.common.messages.Messages;
 import pl.hodan.carservice.common.repository.UserRepository;
 
 import java.util.List;
@@ -74,6 +77,15 @@ public class UsersService {
         if (user.isPresent())
             return user.get();
         throw new UserNotFoundException("User with id " + userId + "notExist");
+    }
+    public boolean checkIsEmailAlreadyExist(String email) {
+        if(userRepository.existsByEmail(email))
+            throw new ValidationException(ValidationErrorList.of("email",Messages.EXIST_EMAIL));
+        return false;
+
+    }
+    public Optional<User> findByEmail(String email){
+        return userRepository.findByEmail(email);
     }
 
 
