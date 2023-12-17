@@ -1,7 +1,10 @@
 package pl.hodan.carservice.common.service;
 
 import org.springframework.stereotype.Service;
+import pl.hodan.carservice.auth.services.UsersService;
+import pl.hodan.carservice.common.entity.Calendar;
 import pl.hodan.carservice.common.entity.PriceList;
+import pl.hodan.carservice.common.exception.CalendarNotFoundException;
 import pl.hodan.carservice.common.exception.PriceListNotFoundException;
 import pl.hodan.carservice.common.repository.PriceListRepository;
 
@@ -22,6 +25,15 @@ public class PriceListService {
         usersService.checkIfUserIdExist(userId);
 
         return priceListRepository.findPriceListByUserId(userId);
+    }
+
+    public PriceList getPriceListById(Long userId, Long calendarId){
+        usersService.checkIfUserIdExist(userId);
+
+        Optional<PriceList> priceList = priceListRepository.findPriceListByUserIdAndId(userId,calendarId);
+
+        return priceList
+                .orElseThrow(()-> new PriceListNotFoundException("PriceList with this id: " + calendarId + "not found"));
     }
 
     public boolean addPriceList(Long userId, PriceList priceList) {

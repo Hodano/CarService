@@ -23,7 +23,7 @@ public class User {
     private String email;
     private String password;
     @OneToOne(cascade = CascadeType.ALL)
-    private UserDetail userDetail;
+    private UserBasicInformation userBasicInformation;
 
     @OneToMany(mappedBy = "user")
     private Set<Calendar> calendarSet;

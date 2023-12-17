@@ -18,10 +18,10 @@ public class MapperConfiguration {
             protected void configure() {
                 map().setId(source.getId());
                 map().setEmail(source.getEmail());
-                map().setName(source.getUserDetail().getName());
-                map().setSurname(source.getUserDetail().getSurname());
-                map().setAddress(source.getUserDetail().getAddress());
-                map().setPhoneNumber(source.getUserDetail().getPhoneNumber());
+                map().setName(source.getUserBasicInformation().getName());
+                map().setSurname(source.getUserBasicInformation().getSurname());
+                map().setAddress(source.getUserBasicInformation().getAddress());
+                map().setPhoneNumber(source.getUserBasicInformation().getPhoneNumber());
             }
         });
 
@@ -30,20 +30,20 @@ public class MapperConfiguration {
             protected void configure() {
                 map().setPassword(source.getPassword());
                 map().setEmail(source.getEmail());
-                map().setName(source.getUserDetail().getName());
-                map().setSurname(source.getUserDetail().getSurname());
-                map().setAddress(source.getUserDetail().getAddress());
-                map().setPhoneNumber(source.getUserDetail().getPhoneNumber());
+                map().setName(source.getUserBasicInformation().getName());
+                map().setSurname(source.getUserBasicInformation().getSurname());
+                map().setAddress(source.getUserBasicInformation().getAddress());
+                map().setPhoneNumber(source.getUserBasicInformation().getPhoneNumber());
 
             }
         });
         modelMapper.addMappings(new PropertyMap<UserDTOPassword, User>() {
             @Override
             protected void configure() {
-                map().getUserDetail().setName(source.getName());
-                map().getUserDetail().setSurname(source.getSurname());
-                map().getUserDetail().setAddress(source.getAddress());
-                map().getUserDetail().setPhoneNumber(source.getPhoneNumber());
+                map().getUserBasicInformation().setName(source.getName());
+                map().getUserBasicInformation().setSurname(source.getSurname());
+                map().getUserBasicInformation().setAddress(source.getAddress());
+                map().getUserBasicInformation().setPhoneNumber(source.getPhoneNumber());
 
                 map().setEmail(source.getEmail());
                 map().setPassword(source.getPassword());
@@ -54,10 +54,10 @@ public class MapperConfiguration {
         modelMapper.addMappings(new PropertyMap<User, User>() {
             @Override
             protected void configure() {
-                map().getUserDetail().setName(source.getUserDetail().getName());
-                map().getUserDetail().setSurname(source.getUserDetail().getSurname());
-                map().getUserDetail().setAddress(source.getUserDetail().getAddress());
-                map().getUserDetail().setPhoneNumber(source.getUserDetail().getPhoneNumber());
+                map().getUserBasicInformation().setName(source.getUserBasicInformation().getName());
+                map().getUserBasicInformation().setSurname(source.getUserBasicInformation().getSurname());
+                map().getUserBasicInformation().setAddress(source.getUserBasicInformation().getAddress());
+                map().getUserBasicInformation().setPhoneNumber(source.getUserBasicInformation().getPhoneNumber());
 
                 map().setEmail(source.getEmail());
                 map().setPassword(source.getPassword());

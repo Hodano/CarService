@@ -1,6 +1,8 @@
 package pl.hodan.carservice.common.service;
 
 import org.springframework.stereotype.Service;
+import pl.hodan.carservice.auth.services.AuthenticationService;
+import pl.hodan.carservice.auth.services.UsersService;
 import pl.hodan.carservice.common.entity.Calendar;
 import pl.hodan.carservice.common.exception.CalendarNotFoundException;
 import pl.hodan.carservice.common.repository.CalendarRepository;
@@ -23,6 +25,14 @@ public class CalendarsService {
         usersService.checkIfUserIdExist(userId);
 
         return calendarRepository.findCalendarsByUserId(userId);
+    }
+    public Calendar getCalendarById(Long userId, Long calendarId){
+        usersService.checkIfUserIdExist(userId);
+
+        Optional<Calendar> calendar = calendarRepository.findCalendarByUserIdAndId(userId,calendarId);
+
+        return calendar
+                .orElseThrow(()-> new CalendarNotFoundException("Calendar with id" + calendarId + " notExist"));
     }
 
     public boolean addCalendar(Long userId, Calendar calendar) {
@@ -68,6 +78,6 @@ public class CalendarsService {
     private void checkIfCalendarIdExistByUserId(Long userId,Long calendarId){
         usersService.checkIfUserIdExist(userId);
         if(!calendarRepository.existsCalendarById(calendarId))
-            throw new CalendarNotFoundException("Calendar with id" + calendarId + "notExist");
+            throw new CalendarNotFoundException("Calendar with id" + calendarId + " notExist");
     }
 }

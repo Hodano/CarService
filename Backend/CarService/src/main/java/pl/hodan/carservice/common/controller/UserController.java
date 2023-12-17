@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.hodan.carservice.DTO.UserDTO;
 import pl.hodan.carservice.DTO.UserDTOPassword;
-import pl.hodan.carservice.common.service.UsersService;
+import pl.hodan.carservice.auth.services.UsersService;
 
 import java.util.List;
 import java.util.Optional;

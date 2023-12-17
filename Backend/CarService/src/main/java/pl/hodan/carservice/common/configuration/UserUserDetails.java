@@ -35,10 +35,10 @@ public class UserUserDetails implements UserDetails {
         email = user.getEmail();
         password = user.getPassword();
         id = user.getId();
-        name = user.getUserDetail().getName();
-        surname = user.getUserDetail().getSurname();
-        address = user.getUserDetail().getAddress();
-        phoneNumber = user.getUserDetail().getPhoneNumber();
+        name = user.getUserBasicInformation().getName();
+        surname = user.getUserBasicInformation().getSurname();
+        address = user.getUserBasicInformation().getAddress();
+        phoneNumber = user.getUserBasicInformation().getPhoneNumber();
         authorities = user.getRoles()
                 .stream()
                 .map(Role::getRole)

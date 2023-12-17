@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class UserDetail {
+public class UserBasicInformation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -19,13 +19,13 @@ public class UserDetail {
     private String address;
     private int phoneNumber;
 
-    public UserDetail(String name, String surname, String address, int phoneNumber) {
+    public UserBasicInformation(String name, String surname, String address, int phoneNumber) {
         this.name = name;
         this.surname = surname;
         this.address = address;
         this.phoneNumber = phoneNumber;
     }
 
-    public UserDetail() {
+    public UserBasicInformation() {
     }
 }

@@ -1,13 +1,13 @@
-package pl.hodan.carservice.common.service;
+package pl.hodan.carservice.auth.services;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import pl.hodan.carservice.DTO.UserDTO;
 import pl.hodan.carservice.DTO.UserDTOPassword;
 import pl.hodan.carservice.common.entity.User;
-import pl.hodan.carservice.DTO.UserDTO;
 import pl.hodan.carservice.common.exception.UserNotFoundException;
 import pl.hodan.carservice.common.exception.ValidationException;
-import pl.hodan.carservice.common.exception.validation.ValidationErrorList;
+import pl.hodan.carservice.common.exception.dto.ValidationErrorList;
 import pl.hodan.carservice.common.messages.Messages;
 import pl.hodan.carservice.common.repository.UserRepository;
 

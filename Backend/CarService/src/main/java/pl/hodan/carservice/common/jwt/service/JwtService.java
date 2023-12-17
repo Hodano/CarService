@@ -27,18 +27,22 @@ public class JwtService {
         final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
     }
-    public String generateToken(UserDetails userDetails){
-        return generateToken( new HashMap<>(), userDetails);
-    }
+//    public String generateToken(UserDetails userDetails){
+//        return generateToken( new HashMap<>(), userDetails);
+//    }
 
-    public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails ){
+    public String generateToken(Map<String, Object> extraClaims, String email ){
         return Jwts.builder()
                 .setClaims(extraClaims)
-                .setSubject(userDetails.getUsername())
+                .setSubject(email)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 100 * 60 * 24))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
+    }
+    public String generateToken(String userName){
+        Map<String,Object> claims = Map.of();
+        return generateToken(claims,userName);
     }
     public boolean isTokenValid(String token, UserDetails userDetails){
         final String username = extractUsername(token);

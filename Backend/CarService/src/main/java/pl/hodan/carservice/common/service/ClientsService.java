@@ -1,8 +1,11 @@
 package pl.hodan.carservice.common.service;
 
 import org.springframework.stereotype.Service;
+import pl.hodan.carservice.auth.services.UsersService;
 import pl.hodan.carservice.common.entity.Client;
+import pl.hodan.carservice.common.entity.PriceList;
 import pl.hodan.carservice.common.exception.ClientNotFoundException;
+import pl.hodan.carservice.common.exception.PriceListNotFoundException;
 import pl.hodan.carservice.common.repository.ClientRepository;
 
 import java.util.List;
@@ -23,6 +26,15 @@ public class ClientsService {
         usersService.checkIfUserIdExist(userId);
 
         return clientRepository.findClientByUserId(userId);
+    }
+
+    public Client getClientByClientId(Long userId, Long clientId){
+        usersService.checkIfUserIdExist(userId);
+
+        Optional<Client> client = clientRepository.findClientByUserIdAndId(userId,clientId);
+
+        return client
+                .orElseThrow(()-> new ClientNotFoundException("Client with this id: " + clientId + "not found"));
     }
 
     public boolean addClient(Long userId, Client client) {

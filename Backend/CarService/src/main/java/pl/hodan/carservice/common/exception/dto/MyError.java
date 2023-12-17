@@ -1,4 +1,4 @@
-package pl.hodan.carservice.common.exception.validation;
+package pl.hodan.carservice.common.exception.dto;
 
 import lombok.AccessLevel;
 import lombok.Getter;
