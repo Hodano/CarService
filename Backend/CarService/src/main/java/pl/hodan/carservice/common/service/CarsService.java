@@ -14,6 +14,7 @@ public class CarsService {
     private final ClientsService clientsService;
 
 
+
     public CarsService(CarRepository carRepository, ClientsService clientsService) {
         this.carRepository = carRepository;
         this.clientsService = clientsService;
@@ -23,6 +24,9 @@ public class CarsService {
         clientsService.checkIfClientIdExist(clientId);
 
         return carRepository.findCarByClientId(clientId);
+    }
+    public Car getCarByCarId(Long carId){
+        return checkIfCarIdExist(carId);
     }
 
     public boolean addCar(Long clientId, Car car) {
@@ -34,7 +38,7 @@ public class CarsService {
         return false;
     }
 
-    public boolean modifyCarWithClientIdByCarId(Long carId, Car newCar){//
+    public boolean modifyCarByCarId(Long carId, Car newCar){//
 
         Optional<Car> car = Optional.ofNullable(checkIfCarIdExist(carId));
         if(car.isPresent()){
@@ -71,11 +75,5 @@ public class CarsService {
         car.setClient(clientsService.checkIfClientIdExist(clientId));
     }
 
-//    private void checkIfCarIdExistByClientId(Long clientId, Long carId) {
-//        clientsService.checkIfClientIdExist(clientId);
-//        if (!carRepository.existsCarById(carId)) {
-//            throw new CarNotFoundException("Car with id" + carId + "notExist");
-//        }
-//    }
 
 }

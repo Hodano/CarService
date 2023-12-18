@@ -22,7 +22,7 @@ public class PriceListController {
 
     @GetMapping("/priceLists")
     public ResponseEntity<List<PriceList>> getPriceListsByUserId() {
-        Long userId = authenticationService.getCurrentUserDetails().getId();
+        Long userId = authenticationService.getCurrentUserId();
 
         List<PriceList> priceLists = priceListService.getPriceListsByUserId(userId);
         return ResponseEntity.ok(priceLists);
@@ -30,7 +30,7 @@ public class PriceListController {
 
     @GetMapping("/priceList")
     public ResponseEntity<PriceList> getPriceListById(@RequestParam Long priceListId) {
-        Long userId = authenticationService.getCurrentUserDetails().getId();
+        Long userId = authenticationService.getCurrentUserId();
 
         PriceList priceList = priceListService.getPriceListById(userId, priceListId);
 
@@ -38,29 +38,29 @@ public class PriceListController {
     }
 
     @PostMapping("/add-priceList")
-    public ResponseEntity addPriceList(@RequestBody PriceList priceList) {
-        Long userId = authenticationService.getCurrentUserDetails().getId();
+    public ResponseEntity<String> addPriceList(@RequestBody PriceList priceList) {
+        Long userId = authenticationService.getCurrentUserId();
 
         if (priceListService.addPriceList(userId, priceList))
             return new ResponseEntity<>(HttpStatus.CREATED);
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>("Price list could not be added", HttpStatus.BAD_REQUEST);
     }
 
     @PutMapping("/modify-priceList")
-    public ResponseEntity modifyPriceList(@RequestParam Long priceListId, @RequestBody PriceList priceList) {
-        Long userId = authenticationService.getCurrentUserDetails().getId();
+    public ResponseEntity<String> modifyPriceList(@RequestParam Long priceListId, @RequestBody PriceList priceList) {
+        Long userId = authenticationService.getCurrentUserId();
 
         if (priceListService.modifyPriceListWithUserIdByPriceListId(userId, priceListId, priceList))
-            return new ResponseEntity(HttpStatus.ACCEPTED);
-        return new ResponseEntity(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Price list modified", HttpStatus.ACCEPTED);
+        return new ResponseEntity<>("Price list not found or could not be modified",HttpStatus.NOT_FOUND);
     }
 
     @DeleteMapping("/delete-priceList")
-    public ResponseEntity deletePriceList(@RequestParam Long priceListId) {
-        Long userId = authenticationService.getCurrentUserDetails().getId();
+    public ResponseEntity<String> deletePriceList(@RequestParam Long priceListId) {
+        Long userId = authenticationService.getCurrentUserId();
 
         if (priceListService.deletePriceListWithUserIdByPriceListId(userId, priceListId))
-            return new ResponseEntity(HttpStatus.OK);
-        return new ResponseEntity(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Price list deleted",HttpStatus.OK);
+        return new ResponseEntity<>("Price list not found or could not be deleted",HttpStatus.NOT_FOUND);
     }
 }

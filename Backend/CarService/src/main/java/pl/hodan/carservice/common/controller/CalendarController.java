@@ -25,43 +25,46 @@ public class CalendarController {
 
     @GetMapping("/calendars")
     public ResponseEntity<List<Calendar>> getCalendarsByUserId() {
-        Long userId = authenticationService.getCurrentUserDetails().getId();
+        Long userId = authenticationService.getCurrentUserId();
 
         List<Calendar> calendars = calendarsService.getCalendarsByUserId(userId);
         return ResponseEntity.ok(calendars);
     }
-    @GetMapping("/calendar")
-    public ResponseEntity<Calendar> getCalendarByCalendarId(@RequestParam Long calendarId){
-        Long userId = authenticationService.getCurrentUserDetails().getId();
 
-        Calendar calendar = calendarsService.getCalendarById(userId,calendarId);
+    @GetMapping("/calendar")
+    public ResponseEntity<Calendar> getCalendarByCalendarId(@RequestParam Long calendarId) {
+        Long userId = authenticationService.getCurrentUserId();
+
+        Calendar calendar = calendarsService.getCalendarById(userId, calendarId);
 
         return ResponseEntity.ok(calendar);
     }
 
     @PostMapping("/add-calendar")
-    public ResponseEntity addCalendar(@RequestBody Calendar calendar) {
-        Long userId = authenticationService.getCurrentUserDetails().getId();
+    public ResponseEntity<String> addCalendar(@RequestBody Calendar calendar) {
+        Long userId = authenticationService.getCurrentUserId();
 
         if (calendarsService.addCalendar(userId, calendar))
             return new ResponseEntity<>(HttpStatus.CREATED);
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>("Calendar could not be added", HttpStatus.BAD_REQUEST);
     }
+
     @PutMapping("modify-calendar")
-    public ResponseEntity modifyCalendar(@RequestParam Long calendarId, @RequestBody Calendar newCalendar){
-        Long userId = authenticationService.getCurrentUserDetails().getId();
+    public ResponseEntity<String> modifyCalendar(@RequestParam Long calendarId, @RequestBody Calendar newCalendar) {
+        Long userId = authenticationService.getCurrentUserId();
 
-        if(calendarsService.modifyCalendarWithUserIdByCalendarId(userId,calendarId,newCalendar))
-            return new ResponseEntity<>(HttpStatus.ACCEPTED);
-        return new ResponseEntity(HttpStatus.NOT_FOUND);
+        if (calendarsService.modifyCalendarWithUserIdByCalendarId(userId, calendarId, newCalendar))
+            return new ResponseEntity<>("Calendar modified", HttpStatus.ACCEPTED);
+        return new ResponseEntity<>("Calendar not found or could not be modified", HttpStatus.NOT_FOUND);
     }
-    @DeleteMapping("delete-calendar")
-    public ResponseEntity deleteCalendar(@RequestParam Long calendarId){
-        Long userId = authenticationService.getCurrentUserDetails().getId();
 
-        if(calendarsService.deleteCalendarWithUserIdByCalendarId(userId,calendarId))
-            return new ResponseEntity<>(HttpStatus.OK);
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    @DeleteMapping("delete-calendar")
+    public ResponseEntity<String> deleteCalendar(@RequestParam Long calendarId) {
+        Long userId = authenticationService.getCurrentUserId();
+
+        if (calendarsService.deleteCalendarWithUserIdByCalendarId(userId, calendarId))
+            return new ResponseEntity<>("Calendar deleted", HttpStatus.OK);
+        return new ResponseEntity<>("Calendar not found or could not be deleted", HttpStatus.NOT_FOUND);
     }
 
 }

@@ -20,13 +20,11 @@ import pl.hodan.carservice.auth.dto.AuthenticationResponse;
 import pl.hodan.carservice.auth.dto.RegisterRequest;
 import pl.hodan.carservice.common.configuration.UserUserDetails;
 import pl.hodan.carservice.common.entity.User;
-import pl.hodan.carservice.common.enums.RolesEnum;
 import pl.hodan.carservice.common.jwt.service.JwtService;
 import pl.hodan.carservice.common.messages.Messages;
 import pl.hodan.carservice.common.repository.UserRepository;
 import pl.hodan.carservice.common.service.RoleService;
 
-import java.nio.file.AccessDeniedException;
 import java.util.Set;
 
 @Service
@@ -100,12 +98,13 @@ public class AuthenticationService {
     private UserUserDetails convertUserForUserDetails(User user) {
         return new UserUserDetails(user);
     }
-    public UserUserDetails getCurrentUserDetails(){
+    public Long getCurrentUserId(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if(authentication==null|| !authentication.isAuthenticated()){
             throw new AuthenticationCredentialsNotFoundException("The user is not logged in or not authenticated");
             }
-        return (UserUserDetails) authentication.getPrincipal();
+        UserUserDetails userDetails =  (UserUserDetails) authentication.getPrincipal();
+        return userDetails.getId();
         }
 }
 

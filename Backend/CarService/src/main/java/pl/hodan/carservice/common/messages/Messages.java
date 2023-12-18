@@ -14,4 +14,12 @@ public class Messages {
 
     public static final String WRONG_LENGTH_TEXT = "wrong.length.text";
 
+    //priceList
+    public static final String PRICE_IS_NULL = "price.is.null";
+    public static final String PRICE_MUST_BE_BIGGER_THAN_1 = "price.must.be.bigger.than.1";
+    //car
+    public static final String CAR_MILEAGE_IS_NULL = "car.mileage.is.null";
+    public static final String CAR_MILEAGE_MUST_BE_BIGGER_THAN_1 = "car.mileage.must.be.bigger.than.1";
+    public static final String CAR_VIN_MUST_BE_LONGER_THAN_8_CHARACTERS = "CAR.VIN.MUST.BE.LONGER.THAN.8.CHARACTERS";
+
 }

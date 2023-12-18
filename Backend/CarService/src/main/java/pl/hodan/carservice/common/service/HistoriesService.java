@@ -23,6 +23,9 @@ public class HistoriesService {
 
         return historyRepository.findHistoriesByCarId(carId);
     }
+    public History getHistoryByHistoryId(Long historyId){
+        return checkIfHistoryIdExist(historyId);
+    }
 
     public boolean addHistory(Long carId, History history) {
         setCarForHistory(carId,history);

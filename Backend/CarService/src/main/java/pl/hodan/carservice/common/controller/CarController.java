@@ -22,25 +22,30 @@ public class CarController {
         List<Car> cars = carsService.getCarsByClientId(clientId);
         return ResponseEntity.ok(cars);
     }
+    @GetMapping("/car")
+    public ResponseEntity<Car> getCarByCarId(@RequestParam Long carId){
+        Car car = carsService.getCarByCarId(carId);
+        return ResponseEntity.ok(car);
+    }
 
     @PostMapping("/add-car")
-    public ResponseEntity addCar(@RequestParam Long clientId, @RequestBody Car car) {
+    public ResponseEntity<String> addCar(@RequestParam Long clientId, @RequestBody Car car) {
         if (carsService.addCar(clientId, car))
-            return new ResponseEntity(HttpStatus.CREATED);
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>("Car could not be added",HttpStatus.BAD_REQUEST);
     }
 
     @PutMapping("/modify-car")
-    public ResponseEntity modifyCar(@RequestParam Long carId, @RequestBody Car car) {
-        if (carsService.modifyCarWithClientIdByCarId(carId, car))
-            return new ResponseEntity(HttpStatus.OK);
-        return new ResponseEntity(HttpStatus.NOT_FOUND);
+    public ResponseEntity<String> modifyCarByCarId(@RequestParam Long carId, @RequestBody Car car) {
+        if (carsService.modifyCarByCarId(carId, car))
+            return new ResponseEntity<>("Car modified",HttpStatus.OK);
+        return new ResponseEntity<>("Car not found or could not be modified",HttpStatus.NOT_FOUND);
     }
 
     @DeleteMapping("/delete-car")
-    public ResponseEntity deleteCar(@RequestParam Long carId) {
+    public ResponseEntity<String> deleteCar(@RequestParam Long carId) {
         if (carsService.deleteCarWithClientIdByCarId(carId))
-            return new ResponseEntity<>(HttpStatus.OK);
-        return new ResponseEntity(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Car deleted",HttpStatus.OK);
+        return new ResponseEntity<>("Car not found or could not be deleted",HttpStatus.NOT_FOUND);
     }
 }
