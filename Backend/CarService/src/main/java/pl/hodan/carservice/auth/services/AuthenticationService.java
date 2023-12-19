@@ -24,6 +24,7 @@ import pl.hodan.carservice.common.jwt.service.JwtService;
 import pl.hodan.carservice.common.messages.Messages;
 import pl.hodan.carservice.common.repository.UserRepository;
 import pl.hodan.carservice.common.service.RoleService;
+import pl.hodan.carservice.email.SendEmailAfterRegistration;
 
 import java.util.Set;
 
@@ -39,7 +40,7 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private static final Logger logger = LoggerFactory.getLogger(AuthenticationService.class);
 
-
+    @SendEmailAfterRegistration
     public ResponseEntity<AuthenticationResponse> register(RegisterRequest request) {
 
         usersService.checkIsEmailAlreadyExist(request.getEmail());
