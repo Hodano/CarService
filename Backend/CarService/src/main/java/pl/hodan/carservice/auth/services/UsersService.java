@@ -1,31 +1,39 @@
 package pl.hodan.carservice.auth.services;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.hodan.carservice.DTO.UserDTO;
 import pl.hodan.carservice.DTO.UserDTOPassword;
+import pl.hodan.carservice.common.entity.Role;
 import pl.hodan.carservice.common.entity.User;
 import pl.hodan.carservice.common.exception.UserNotFoundException;
 import pl.hodan.carservice.common.exception.ValidationException;
 import pl.hodan.carservice.common.exception.dto.ValidationErrorList;
 import pl.hodan.carservice.common.messages.Messages;
 import pl.hodan.carservice.common.repository.UserRepository;
+import pl.hodan.carservice.common.service.RoleService;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
 public class UsersService {
     private final UserRepository userRepository;
+    private final RoleService roleService;
+    private final PasswordEncoder passwordEncoder;
+
 
     private final ModelMapper modelMapper;
 
-    public UsersService(UserRepository userRepository, ModelMapper modelMapper) {
+    public UsersService(UserRepository userRepository, RoleService roleService, PasswordEncoder passwordEncoder,  ModelMapper modelMapper) {
         this.userRepository = userRepository;
+        this.roleService = roleService;
+        this.passwordEncoder = passwordEncoder;
         this.modelMapper = modelMapper;
     }
-
     public List<UserDTO> getUsers() {
         List<User> users = userRepository.findAll();
 
@@ -43,21 +51,42 @@ public class UsersService {
     }
 
     public boolean createUser(UserDTOPassword userDTOPassword) {
-        User user = modelMapper.map(userDTOPassword, User.class);
-        if (userRepository.existsByEmail(user.getEmail()))
-            return false;
+
+        checkIsEmailAlreadyExist(userDTOPassword.getEmail());
+
+        User user = modelMapper.map(userDTOPassword,User.class);
+        user.setPassword(passwordEncoder.encode(userDTOPassword.getPassword()));
+        user.setRoles(Set.of(roleService.setUserRole()));
+
+        userRepository.save(user);
+        return true;
+    }
+    public boolean createAdmin(UserDTOPassword userDTOPassword) {
+
+        checkIsEmailAlreadyExist(userDTOPassword.getEmail());
+
+        User user = modelMapper.map(userDTOPassword,User.class);
+        user.setPassword(passwordEncoder.encode(userDTOPassword.getPassword()));
+        user.setRoles(Set.of(roleService.setAdminRole()));
+
         userRepository.save(user);
         return true;
     }
 
     public boolean modifyUser(Long userId, UserDTOPassword newUserDTOPassword) {
-        User newUser = modelMapper.map(newUserDTOPassword, User.class);
 
         Optional<User> searchedUser = userRepository.findById(userId);
         if (searchedUser.isPresent()) {
-            User user = searchedUser.get();
-            modelMapper.map(newUser,user);
-            userRepository.save(user);
+            User existingUser = searchedUser.get();
+            Set<Role> originalRoles = existingUser.getRoles();
+
+            modelMapper.map(newUserDTOPassword,existingUser);
+
+            existingUser.setPassword(passwordEncoder.encode(newUserDTOPassword.getPassword()));
+            existingUser.setRoles(originalRoles);
+
+            userRepository.save(existingUser);
+
             return true;
         }
         return false;
@@ -84,9 +113,7 @@ public class UsersService {
         return false;
 
     }
-    public Optional<User> findByEmail(String email){
-        return userRepository.findByEmail(email);
-    }
+
 
 
 

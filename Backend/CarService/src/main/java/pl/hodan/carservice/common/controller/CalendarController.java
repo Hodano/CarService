@@ -3,6 +3,7 @@ package pl.hodan.carservice.common.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import pl.hodan.carservice.auth.services.AuthenticationService;
@@ -11,7 +12,7 @@ import pl.hodan.carservice.common.entity.Calendar;
 import pl.hodan.carservice.common.service.CalendarsService;
 
 import java.util.List;
-
+@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
 @RestController
 @RequestMapping(("/cars-service"))
 public class CalendarController {
@@ -23,6 +24,7 @@ public class CalendarController {
         this.authenticationService = authenticationService;
     }
 
+
     @GetMapping("/calendars")
     public ResponseEntity<List<Calendar>> getCalendarsByUserId() {
         Long userId = authenticationService.getCurrentUserId();
@@ -30,7 +32,6 @@ public class CalendarController {
         List<Calendar> calendars = calendarsService.getCalendarsByUserId(userId);
         return ResponseEntity.ok(calendars);
     }
-
     @GetMapping("/calendar")
     public ResponseEntity<Calendar> getCalendarByCalendarId(@RequestParam Long calendarId) {
         Long userId = authenticationService.getCurrentUserId();

@@ -2,12 +2,13 @@ package pl.hodan.carservice.common.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pl.hodan.carservice.common.entity.History;
 import pl.hodan.carservice.common.service.HistoriesService;
 
 import java.util.List;
-
+@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
 @RestController
 @RequestMapping("/cars-service")
 public class HistoryController {

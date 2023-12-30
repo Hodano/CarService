@@ -96,7 +96,7 @@ public class AuthenticationService {
 
     }
 
-    private UserUserDetails convertUserForUserDetails(User user) {
+    public UserUserDetails convertUserForUserDetails(User user) {
         return new UserUserDetails(user);
     }
     public Long getCurrentUserId(){

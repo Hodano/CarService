@@ -1,12 +1,10 @@
 package pl.hodan.carservice.common.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import pl.hodan.carservice.common.enums.RolesEnum;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Builder
@@ -36,11 +34,9 @@ public class User {
             name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
+
     private Set<Role> roles;
 
-    public void setDefaultRole(){
-        Role role = new Role();
-        role.setRole(RolesEnum.USER);
-    }
+
 
 }

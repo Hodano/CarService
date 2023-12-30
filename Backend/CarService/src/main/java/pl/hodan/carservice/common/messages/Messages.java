@@ -22,4 +22,10 @@ public class Messages {
     public static final String CAR_MILEAGE_MUST_BE_BIGGER_THAN_1 = "car.mileage.must.be.bigger.than.1";
     public static final String CAR_VIN_MUST_BE_LONGER_THAN_8_CHARACTERS = "CAR.VIN.MUST.BE.LONGER.THAN.8.CHARACTERS";
 
+    //user(ADMIN)
+    public static final String THE_CHANGED_PASSWORD_IS_THE_SAME = "THE.CHANGED.PASSWORD.IS.THE.SAME";
+
+    //role
+    public static final String THIS_ROLES_DO_NOT_EXIST = "this.roles.do.not.exist";
+
 }

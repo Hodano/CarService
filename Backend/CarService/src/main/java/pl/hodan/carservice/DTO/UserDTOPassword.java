@@ -8,4 +8,5 @@ import lombok.Setter;
 public class UserDTOPassword extends UserDTO{
     private String password;
 
+
 }

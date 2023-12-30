@@ -4,12 +4,15 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import pl.hodan.carservice.DTO.UserDTO;
 import pl.hodan.carservice.DTO.UserDTOPassword;
 import pl.hodan.carservice.common.entity.User;
 
 @Configuration
 public class MapperConfiguration {
+
+
     @Bean
     public ModelMapper modelMapper(){
         ModelMapper modelMapper = new ModelMapper();
@@ -22,6 +25,7 @@ public class MapperConfiguration {
                 map().setSurname(source.getUserBasicInformation().getSurname());
                 map().setAddress(source.getUserBasicInformation().getAddress());
                 map().setPhoneNumber(source.getUserBasicInformation().getPhoneNumber());
+                map().setRoles(source.getRoles());
             }
         });
 
@@ -46,36 +50,14 @@ public class MapperConfiguration {
                 map().getUserBasicInformation().setPhoneNumber(source.getPhoneNumber());
 
                 map().setEmail(source.getEmail());
-                map().setPassword(source.getPassword());
-                map().setId(source.getId());
-
-            }
-        });
-        modelMapper.addMappings(new PropertyMap<User, User>() {
-            @Override
-            protected void configure() {
-                map().getUserBasicInformation().setName(source.getUserBasicInformation().getName());
-                map().getUserBasicInformation().setSurname(source.getUserBasicInformation().getSurname());
-                map().getUserBasicInformation().setAddress(source.getUserBasicInformation().getAddress());
-                map().getUserBasicInformation().setPhoneNumber(source.getUserBasicInformation().getPhoneNumber());
-
-                map().setEmail(source.getEmail());
-                map().setPassword(source.getPassword());
                 skip(destination.getId());
 
+
+
             }
         });
-//        modelMapper.addMappings(new PropertyMap<Client, Client>() {
-//            @Override
-//            protected void configure() {
-//                map().setName(source.getName());
-//                map().setSurname(source.getSurname());
-//                map().setAddress(source.getAddress());
-//                map().setPhoneNumber(source.getPhoneNumber());
-//                map().setEmail(source.getEmail());
-//
-//            }
-//        });
+
+
         return modelMapper;
     }
 }
