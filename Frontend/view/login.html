@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../css/style-login.css">
+    <title> Login Page </title>
+</head>
+<body>
+    <div class="container">
+        <div class= " login-all">
+            <div class="login-field-container">
+            <form id="logInForm" class="form-class-with-field" action="login" method="POST">
+                <div class="messages">
+                    <!-- <div id="error-message" style="display:none; color: red;"></div> -->
+                </div>
+                    <input class= "field-email" name="email" type="tex" placeholder="email@email.com">
+                    <input class="field-password"  name="password" type="password" placeholder="password">
+    
+                </form>
+
+            </div>
+            <div class = "button-login-container">
+                
+                    <button class="button-log-in" type="submit" form="logInForm">Log in</button>
+                    <button class="button-sign-up" type="button">
+                        <a href="register.html">Sign Up</a>
+                    </button>
+                
+                </div>
+        </div>    
+        <div class="logo">
+            <img class="logo-img" src="../image/logo.svg">
+        </div>
+    </div>
+    <script type="module" src="../Js/login.js"></script>
+</body>
