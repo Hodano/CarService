@@ -9,6 +9,7 @@ import pl.hodan.carservice.common.entity.Client;
 import pl.hodan.carservice.common.service.ClientsService;
 
 import java.util.List;
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
 @RestController
 @RequestMapping("/cars-service")

@@ -24,7 +24,7 @@ import pl.hodan.carservice.common.jwt.service.JwtService;
 import pl.hodan.carservice.common.messages.Messages;
 import pl.hodan.carservice.common.repository.UserRepository;
 import pl.hodan.carservice.common.service.RoleService;
-import pl.hodan.carservice.email.SendEmailAfterRegistration;
+import pl.hodan.carservice.auth.email.SendEmailAfterRegistration;
 
 import java.util.Set;
 
@@ -71,16 +71,18 @@ public class AuthenticationService {
         try {
             Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
 
+//            SecurityContextHolder.getContext().setAuthentication(authentication);
+            String jwt = jwtService.generateToken(request.getEmail());
 
             UserUserDetails userDetails = (UserUserDetails) authentication.getPrincipal();
             AuthenticationResponse response = AuthenticationResponse.builder()
                     .name(userDetails.getName())
                     .surname(userDetails.getSurname())
                     .userName(userDetails.getUsername())
+                    .token(jwt)
                     .build();
 
             return ResponseEntity.ok()
-                    .header(HttpHeaders.AUTHORIZATION, jwtService.generateToken(request.getEmail()))
                     .body(response);
         } catch (AuthenticationException e) {
             logger.warn("Authentication failed for user: {}" ,request.getEmail());

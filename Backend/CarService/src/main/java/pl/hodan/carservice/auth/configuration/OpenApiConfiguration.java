@@ -7,6 +7,11 @@ import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 @Configuration
 public class OpenApiConfiguration {
@@ -28,4 +33,17 @@ public class OpenApiConfiguration {
                                 .scheme("bearer")
                                 .bearerFormat("JWT")));
     }
+//    @Bean
+//    public CorsFilter corsFilter() {
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        CorsConfiguration config = new CorsConfiguration();
+//        config.setAllowCredentials(true); // you might not need this
+//        config.addAllowedOrigin("*"); // allow all origins
+//        config.addAllowedHeader("*"); // allow all headers
+//        config.addAllowedMethod("*"); // allow all methods (GET, POST, etc.)
+//        source.registerCorsConfiguration("/**", config);
+//        return new CorsFilter(source);
+//    }
+
+
 }

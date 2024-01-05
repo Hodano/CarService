@@ -1,5 +1,6 @@
 package pl.hodan.carservice.common.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -34,21 +35,21 @@ public class UserController {
     }
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("add-user")
-    public ResponseEntity createUser(@RequestBody UserDTOPassword userDTOPassword){
+    public ResponseEntity createUser(@Valid @RequestBody UserDTOPassword userDTOPassword){
         if(usersService.createUser(userDTOPassword))
             return new ResponseEntity<>(HttpStatus.CREATED);
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("add-admin")
-    public ResponseEntity createAdmin(@RequestBody UserDTOPassword userDTOPassword){
+    public ResponseEntity createAdmin(@Valid @RequestBody UserDTOPassword userDTOPassword){
         if(usersService.createAdmin(userDTOPassword))
             return new ResponseEntity<>(HttpStatus.CREATED);
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("modify-user")
-    public ResponseEntity modifyUser(@RequestParam Long id, @RequestBody UserDTOPassword userDTOPassword){
+    public ResponseEntity modifyUser(@Valid @RequestParam Long id, @RequestBody UserDTOPassword userDTOPassword){
         if(usersService.modifyUser(id,userDTOPassword))
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);

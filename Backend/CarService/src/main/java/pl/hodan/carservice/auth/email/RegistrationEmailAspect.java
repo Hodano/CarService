@@ -1,11 +1,11 @@
-package pl.hodan.carservice.email;
+package pl.hodan.carservice.auth.email;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 import pl.hodan.carservice.auth.dto.RegisterRequest;
-import pl.hodan.carservice.email.service.EmailService;
+import pl.hodan.carservice.auth.email.service.EmailService;
 
 @Aspect
 @Component
@@ -16,7 +16,7 @@ public class RegistrationEmailAspect {
         this.emailService = emailService;
     }
 
-    @AfterReturning("@annotation(pl.hodan.carservice.email.SendEmailAfterRegistration)")
+    @AfterReturning("@annotation(pl.hodan.carservice.auth.email.SendEmailAfterRegistration)")
     public void sendEmailAfterRegistration(JoinPoint joinpoint) {
         Object[] args = joinpoint.getArgs();
             if(args.length >0 && args[0] instanceof RegisterRequest){

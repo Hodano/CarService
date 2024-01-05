@@ -14,4 +14,5 @@ public class AuthenticationResponse {
     private String surname;
     private String userName;
 
+    private String token;
 }

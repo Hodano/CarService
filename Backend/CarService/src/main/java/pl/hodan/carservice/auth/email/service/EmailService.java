@@ -1,4 +1,4 @@
-package pl.hodan.carservice.email.service;
+package pl.hodan.carservice.auth.email.service;
 
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
